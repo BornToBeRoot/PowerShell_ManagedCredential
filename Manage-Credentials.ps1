@@ -2,14 +2,47 @@
 # Language     :  PowerShell 4.0
 # Script Name  :  Manage-Credentials.ps1
 # Autor        :  BornToBeRoot (https://github.com/BornToBeRoot)
-# Description  :  Script to Encrypt/Decrypt Credentials and save them as Xml-File
+# Description  :  Script to Encrypt/Decrypt Credentials and save them as variable or xml-file
 # Repository   :  https://github.com/BornToBeRoot/PowerShell-Manage-Credentials
 ###############################################################################################################
 
+<#
+    .SYNOPSIS
+    Script to Encrypt/Decrypt Credentials (Username and Password) and save them as xml-file using SecureStrings
+
+    .DESCRIPTION
+    With this script, you can encrypt your credentials (username and password) as SecureStrings and save them 
+    as a variable or xml-file. You can also decrypt the variable or xml-file and return a PSCredential-Object
+    or username and password in plain text.
+
+    The encrypted credentials can only be decrypted on the same computer and under the same user, which encrypted
+    them. 
+    For exmaple: 
+    If user A encrypt the credentials on computer A, user B cannot decrypt the credentials on 
+    computer A and also user A cannot decrypt the credentials on Computer B.
+        
+    If you found a bug or have some ideas to improve this script... Let me know. You find my Github profile in
+    the links below.
+
+    .EXAMPLE
+    $Test_Cred = .\Manage-Credentials.ps1 -Encrypt
+    
+    .EXAMPLE
+    .\Manage-Credentials.ps1 -Encrypt -OutFile Test_Cred.xml
+
+    .EXAMPLE
+    .\Manage-Credentials.ps1 -Decrypt -EncryptedCredentials $Test_Cred
+
+    .EXAMPLE
+    .\Manage-Credentials.ps1 -Decrypt -FilePath .\Test_Cred.xml -PasswordAsPlainText
+    
+    .LINK
+    Github Profil:         https://github.com/BornToBeRoot
+    Github Repository:     https://github.com/BornToBeRoot/PowerShell-Manage-Credentials
+#>
 
 
-
-[CmdletBinding()]
+[CmdletBinding(DefaultParameterSetName='Encrypt')]
 Param(
 	[Parameter(
 		ParameterSetName='Encrypt',
@@ -25,7 +58,7 @@ Param(
     [Parameter(
 		ParameterSetName='Encrypt',
 		Position=1,
-		HelpMessage='Path to the Xml-File where the encrypted credentials will be saved')]
+		HelpMessage='Path to the xml-file where the encrypted credentials will be saved')]
 	[String]$OutFile,
 		
 	[Parameter(
@@ -42,7 +75,7 @@ Param(
     [Parameter(
 		ParameterSetName='Decrypt',
 		Position=1,
-		HelpMessage='Path to the Xml-File where the encrypted credentials are saved')]
+		HelpMessage='Path to the xml-file where the encrypted credentials are saved')]
 	[String]$FilePath,
 
     [Parameter(
@@ -69,7 +102,7 @@ if($Encrypt)
 	Add-Member -InputObject $EncryptedCredentials -MemberType NoteProperty -Name PasswordAsSecureString -Value ($Credentials.Password | ConvertFrom-SecureString)
     
     if(-not[String]::IsNullOrEmpty($OutFile))
-    {
+    {        
         $FilePath = $OutFile.Replace(".\","").Replace("\","") 
                 
         if(-not([System.IO.Path]::IsPathRooted($FilePath))) 
@@ -102,7 +135,12 @@ elseif($Decrypt)
 {
     if(-not([String]::IsNullOrEmpty($FilePath)))
     {
-         $EncryptedCredentials = Import-Clixml -Path $FilePath
+        if($EncryptedCredentials -ne $null)
+        {
+            Write-Host 'Both parameters ("-EncryptedCredentials" and "-FilePath") are not allowed. Using parameter "-FilePath"' -ForegroundColor Yellow
+        }
+
+        $EncryptedCredentials = Import-Clixml -Path $FilePath
     }
     
     if($EncryptedCredentials -eq $null)
@@ -132,4 +170,9 @@ elseif($Decrypt)
         
         return New-Object System.Management.Automation.PSCredential($Username , $Password)
     }
+}
+else
+{
+    Write-Host 'No parameters detected! Use "-Encrypt" or "-Decrypt"' -ForegroundColor Yellow
+    Write-Host 'Try "Get-Help .\Manage-Credentials.ps1" for more details'        
 }
