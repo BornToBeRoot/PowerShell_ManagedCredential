@@ -150,12 +150,16 @@ elseif($Decrypt)
         return
     }    
 
-    $BSTR_Username = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR(($EncryptedCredentials.UsernameAsSecureString | ConvertTo-SecureString))
-    $Username = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR_Username)
+    $SecureString_Password = $EncryptedCredentials.PasswordAsSecureString | ConvertTo-SecureString 
+    $SecureString_Username = $EncryptedCredentials.UsernameAsSecureString | ConvertTo-SecureString
+    
+    $BSTR_Username = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($SecureString_Username)
+    $Username = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR_Username) 
+     
        
     if($PasswordAsPlainText) 
     {
-        $BSTR_Password = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR(($EncryptedCredentials.PasswordAsSecureString | ConvertTo-SecureString))
+        $BSTR_Password = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($SecureString_Password)
         $Password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR_Password)
 
         $PlainText_Credentials = New-Object -Type PSObject
@@ -166,9 +170,7 @@ elseif($Decrypt)
     }
     else
     {
-        $Password = $EncryptedCredentials.PasswordAsSecureString | ConvertTo-SecureString
-        
-        return New-Object System.Management.Automation.PSCredential($Username , $Password)
+        return New-Object System.Management.Automation.PSCredential($Username , $SecureString_Password)
     }
 }
 else
