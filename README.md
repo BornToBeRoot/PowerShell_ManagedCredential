@@ -74,7 +74,7 @@ Decrypt credentials and return password as plain text (custom object)
 </Objs>
 ```
 
-### return PSCredentials
+### PSCredentials
 
 ```powershell
 UserName                                                             Password
@@ -82,7 +82,7 @@ UserName                                                             Password
 Admin                                                                System.Security.SecureString
 ```
 
-### return Custom-PSObject (with password in plain text)
+### Custom-PSObject (with password in plain text)
 
 ```powershell
 Username                                                             Password
