@@ -57,7 +57,7 @@ Decrypt credentials and return password as plain text (custom object)
 
 ## Output
 
-### Encrypted Xml-File
+### Encrypted Xml-File (which can be saved on disk)
 
 ```xml
 <Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
@@ -74,7 +74,7 @@ Decrypt credentials and return password as plain text (custom object)
 </Objs>
 ```
 
-### PSCredentials
+### return PSCredentials
 
 ```powershell
 UserName                                                             Password
@@ -82,7 +82,7 @@ UserName                                                             Password
 Admin                                                                System.Security.SecureString
 ```
 
-### Custom-Object (password in plain text )
+### return Custom-PSObject (with password in plain text)
 
 ```powershell
 Username                                                             Password
