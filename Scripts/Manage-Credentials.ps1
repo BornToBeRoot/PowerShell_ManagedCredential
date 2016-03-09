@@ -172,7 +172,7 @@ Process
         }
         else
         {
-            return New-Object System.Management.Automation.PSCredential($Username , $SecureString_Password)
+            return New-Object System.Management.Automation.PSCredential($Username, $SecureString_Password)
         }
     }
     else
