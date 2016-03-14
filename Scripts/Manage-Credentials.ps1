@@ -3,7 +3,7 @@
 # Script Name  :  Manage-Credentials.ps1
 # Autor        :  BornToBeRoot (https://github.com/BornToBeRoot)
 # Description  :  Script to Encrypt/Decrypt Credentials and save them as variable or xml-file
-# Repository   :  https://github.com/BornToBeRoot/PowerShell-Manage-Credentials
+# Repository   :  https://github.com/BornToBeRoot/PowerShell_Manage-Credentials
 ###############################################################################################################
 # Date copied  : 09.02.2015 
 
@@ -37,7 +37,7 @@
     
     .LINK
     Github Profil:         https://github.com/BornToBeRoot
-    Github Repository:     https://github.com/BornToBeRoot/PowerShell-Manage-Credentials
+    Github Repository:     https://github.com/BornToBeRoot/PowerShell_Manage-Credentials
 #>
 
 
@@ -101,7 +101,7 @@ Process
             
         $EncryptedCredentials = New-Object -Type PSObject
         Add-Member -InputObject $EncryptedCredentials -MemberType NoteProperty -Name UsernameAsSecureString -Value ($Credentials.Username | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString)
-	    Add-Member -InputObject $EncryptedCredentials -MemberType NoteProperty -Name PasswordAsSecureString -Value ($Credentials.Password | ConvertFrom-SecureString)
+	Add-Member -InputObject $EncryptedCredentials -MemberType NoteProperty -Name PasswordAsSecureString -Value ($Credentials.Password | ConvertFrom-SecureString)
     
         if(-not[String]::IsNullOrEmpty($OutFile))
         {        
@@ -166,7 +166,7 @@ Process
 
             $PlainText_Credentials = New-Object -Type PSObject
             Add-Member -InputObject $PlainText_Credentials -MemberType NoteProperty -Name Username -Value $Username
-	        Add-Member -InputObject $PlainText_Credentials -MemberType NoteProperty -Name Password -Value $Password
+	    Add-Member -InputObject $PlainText_Credentials -MemberType NoteProperty -Name Password -Value $Password
 
             return $PlainText_Credentials
         }
