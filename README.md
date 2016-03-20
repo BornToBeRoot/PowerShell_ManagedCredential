@@ -21,6 +21,8 @@ Encrypted credentials as xml-file:
 
 2) Open a PowerShell-Console and import the module with the command `Import-Module ManageCredentials`
 
+>_On workstations i would recommended using the module. For servers, i would prefer using the script, because you don't need to install anything._
+
 ## Syntax
 
 ### Module
@@ -53,21 +55,52 @@ Decrypt credentials
 
 ## Example
 
+### Module
+
+#### Encrypt
+
+Save encrypted credentials as variable
+
+```powershell
+$example_encrypted_credentials = New-ManagedCredential
+# (Get-Credentials)-Window is shown to enter username and password. You don't need to type the password as plain text.
+```
+
+Encrypt credentials and save as xml-file. 
+
+```powershell
+New-ManagedCredential -OutFile E:\Scripts\example_credentials.xml
+# (Get-Credentials)-Window is shown to enter username and password. You don't need to type the password as plain text. 
+```
+
+#### Decrypt
+
+Decrypt credentials and return PSCredentials-Object
+
+```powershell
+Get-ManagedCredential -EncryptedCredentials $example_encrypted_credentials
+```
+
+Decrypt credentials and return password as plain text (custom object)
+
+```powershell
+Get-ManagedCredential -FilePath E:\Scripts\example_credentials.xml -PasswordAsPlainText
+```
 ### Script
 
 #### Encrypt
 
-Save encrypted credentials and save as variable
+Save encrypted credentials as variable
 
 ```powershell
 $example_encrypted_credentials = .\Manage-Credentials.ps1 -Encrypt
 # (Get-Credentials)-Window is shown to enter username and password. You don't need to type the password as plain text.
 ```
 
-Encrypted credentials and save as xml-file. 
+Encrypt credentials and save as xml-file. 
 
 ```powershell
-.\Manage-Credentials.ps1 -Encrypt -OutFile C:\Scripts\example_credentials.xml
+.\Manage-Credentials.ps1 -Encrypt -OutFile E:\Scripts\example_credentials.xml
 # (Get-Credentials)-Window is shown to enter username and password. You don't need to type the password as plain text. 
 ```
 
@@ -82,12 +115,12 @@ Decrypt credentials and return PSCredentials-Object
 Decrypt credentials and return password as plain text (custom object)
 
 ```powershell
-.\Manage-Credentials.ps1 -Decrypt -FilePath C:\Scripts\example_credentials.xml -PasswordAsPlainText
+.\Manage-Credentials.ps1 -Decrypt -FilePath E:\Scripts\example_credentials.xml -PasswordAsPlainText
 ```
 
 ## Output
 
-### Encrypted Xml-File (which can be saved on disk)
+### Encrypted xml-file
 
 ```xml
 <Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
