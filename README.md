@@ -9,9 +9,16 @@ The encrypted credentials can only be decrypted on the same computer and under t
 
 For exmaple: If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the credentials on computer "A" and also user "A" cannot decrypt the credentials on Computer "B".
 
+Module and Script:
+![Screenshot of Module and Script Result](https://github.com/BornToBeRoot/PowerShell_Manage-Credentials/blob/master/Images/Module_and_Script.png?raw=true)
+
+Encrypted credentials as xml-file:
+![Screenshot of Module and Script Result](https://github.com/BornToBeRoot/PowerShell_Manage-Credentials/blob/master/Images/Encrypted_Credentials_XML-File.png?raw=true)
+
 ## Install the Module
 
 1) Copy the folder named "Module/ManageCredentials" in your profile under C:\Users\%username%\Documents\WindowsPowerShell\Modules
+
 2) Open a PowerShell-Console and import the module with the command `Import-Module ManageCredentials`
 
 ## Syntax
