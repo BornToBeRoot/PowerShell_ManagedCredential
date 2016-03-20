@@ -1,15 +1,36 @@
 # PowerShell Manage Credentials
 
-Script to Encrypt/Decrypt Credentials (Username and Password) and save them as variable or xml-file using SecureStrings.
+Module and Script to encrypt/decrypt credentials (username and password) and save them as variable or xml-file using SecureStrings.
 
 ## Description
 
 With this script, you can encrypt your credentials (username and password) as SecureStrings and save them as a variable or xml-file. You can also decrypt the variable or xml-file and return a PSCredential-Object or username and password in plain text.
 The encrypted credentials can only be decrypted on the same computer and under the same user, which encrypted them.
 
-For exmaple: If user A encrypt the credentials on computer A, user B cannot decrypt the credentials on computer A and also user A cannot decrypt the credentials on Computer B.
+For exmaple: If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the credentials on computer "A" and also user "A" cannot decrypt the credentials on Computer "B".
+
+## Install the Module
+
+1) Copy the folder named "Module/ManageCredentials" in your profile under C:\Users\%username%\Documents\WindowsPowerShell\Modules
+2) Open a PowerShell-Console and import the module with the command `Import-Module ManageCredentials`
 
 ## Syntax
+
+### Module
+
+Encrypt credentials
+
+```powershell
+New-ManagedCredential [[-Credentials] <PSCredential>] [[-OutFile] <String>] [<CommonParameters>]
+``` 
+
+Decrypt credentials
+
+```powershell
+Get-ManagedCredential [[-EncryptedCredentials] <Object>] [[-FilePath] <String>] [[-PasswordAsPlainText]] [<CommonParameters>]
+```
+
+### Script
 
 Encrypt credentials
 
@@ -25,7 +46,9 @@ Decrypt credentials
 
 ## Example
 
-### Encrypt
+### Script
+
+#### Encrypt
 
 Save encrypted credentials and save as variable
 
@@ -41,7 +64,7 @@ Encrypted credentials and save as xml-file.
 # (Get-Credentials)-Window is shown to enter username and password. You don't need to type the password as plain text. 
 ```
 
-### Decrypt
+#### Decrypt
 
 Decrypt credentials and return PSCredentials-Object
 
