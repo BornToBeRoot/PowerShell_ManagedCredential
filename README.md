@@ -27,13 +27,13 @@ Encrypted credentials as xml-file:
 
 ### Module
 
-Encrypt credentials
+#### Encrypt
 
 ```powershell
 New-ManagedCredential [[-Credentials] <PSCredential>] [[-OutFile] <String>] [<CommonParameters>]
 ``` 
 
-Decrypt credentials
+#### Decrypt
 
 ```powershell
 Get-ManagedCredential [[-EncryptedCredentials] <Object>] [[-FilePath] <String>] [[-PasswordAsPlainText]] [<CommonParameters>]
@@ -41,13 +41,13 @@ Get-ManagedCredential [[-EncryptedCredentials] <Object>] [[-FilePath] <String>] 
 
 ### Script
 
-Encrypt credentials
+#### Encrypt
 
 ```powershell
 .\Manage-Credentials.ps1 [-Encrypt] [[-Credentials] <PSCredential>] [[-OutFile] <String>] [<CommonParameters>]
 ```
 
-Decrypt credentials
+#### Decrypt
 
 ```powershell
 .\Manage-Credentials.ps1 [-Decrypt] [[-EncryptedCredentials] <Object>] [[-FilePath] <String>] [[-PasswordAsPlainText]] [<CommonParameters>]
