@@ -9,7 +9,6 @@ The encrypted credentials can only be decrypted on the same computer and under t
 
 For exmaple: If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the credentials on computer "A" and also user "A" cannot decrypt the credentials on Computer "B".
 
-Module and Script:
 ![Screenshot of Module and Script Result](https://github.com/BornToBeRoot/PowerShell_Manage-Credentials/blob/master/Images/Module_and_Script.png?raw=true)
 
 ## Install the Module
