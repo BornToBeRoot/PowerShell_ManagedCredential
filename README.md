@@ -9,7 +9,7 @@ The encrypted credentials can only be decrypted on the same computer and under t
 
 For exmaple: If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the credentials on computer "A" and also user "A" cannot decrypt the credentials on Computer "B".
 
-![Screenshot of Module and Script Result](https://github.com/BornToBeRoot/PowerShell_Manage-Credentials/blob/master/Doku/Module_and_Script.png?raw=true)
+![Screenshot of Module and Script Result](https://github.com/BornToBeRoot/PowerShell_Manage-Credentials/blob/master/Documentation/Module_and_Script.png?raw=true)
 
 ## Install the Module
 
@@ -118,7 +118,7 @@ Decrypt credentials and return password as plain text (custom object)
 
 ### Encrypted credentials as xml-file
 
-![Screenshot of Module and Script Result](https://github.com/BornToBeRoot/PowerShell_Manage-Credentials/blob/master/Doku/Encrypted_Credentials_XML-File.png?raw=true)
+![Screenshot of Module and Script Result](https://github.com/BornToBeRoot/PowerShell_Manage-Credentials/blob/master/Documentation/Encrypted_Credentials_XML-File.png?raw=true)
 
 ### PSCredentials
 
