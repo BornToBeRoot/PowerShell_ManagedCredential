@@ -11,11 +11,14 @@ For exmaple: If user "A" encrypt the credentials on computer "A", user "B" canno
 
 ![Screenshot of Module and Script Result](https://github.com/BornToBeRoot/PowerShell_Manage-Credentials/blob/master/Documentation/Module_and_Script.png?raw=true)
 
-## Install the Module
+## Download and Install
 
-1) Copy the folder named "Module/ManageCredentials" in your profile under C:\Users\%username%\Documents\WindowsPowerShell\Modules
+The Module can be installed like every other PowerShell-Module. If you don't know how... follow this steps:
 
-2) Open a PowerShell-Console and import the module with the command `Import-Module ManageCredentials`
+* Download the latest version of the module and all scripts from GitHub ([latest release](https://github.com/BornToBeRoot/PowerShell-Manage-Credentials/releases/latest))
+* Copy the folder `Module/ManageCredentials` in your profile under `C:\Users\%username%\Documents\WindowsPowerShell\Modules`
+* Open up a PowerShell as an admin and set the execution policy: `Set-ExecutionPolicy RemoteSigned`
+* Import the "ManageCredentials"-Module with the command `Import-Module ManageCredentials` (Maybe add this command to your PowerShell profile)
 
 >_On workstations i would recommended using the module. For servers, i would prefer using the script, because you don't need to install anything._
 
