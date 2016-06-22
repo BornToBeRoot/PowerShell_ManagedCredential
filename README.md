@@ -26,29 +26,17 @@ The Module can be installed like every other PowerShell-Module. If you don't kno
 
 ### Module
 
-Encrypting credentials
-
 ```powershell
 New-ManagedCredential [[-Credentials] <PSCredential>] [[-OutFile] <String>] [<CommonParameters>]
-``` 
 
-Decrypting credentials
-
-```powershell
 Get-ManagedCredential [[-EncryptedCredentials] <Object>] [[-FilePath] <String>] [[-PasswordAsPlainText]] [<CommonParameters>]
 ```
 
 ### Script
 
-Encrypting credentials
-
 ```powershell
 .\Manage-Credentials.ps1 [-Encrypt] [[-Credentials] <PSCredential>] [[-OutFile] <String>] [<CommonParameters>]
-```
 
-Decrypting credentials
-
-```powershell
 .\Manage-Credentials.ps1 [-Decrypt] [[-EncryptedCredentials] <Object>] [[-FilePath] <String>] [[-PasswordAsPlainText]] [<CommonParameters>]
 ```
 
@@ -56,85 +44,39 @@ Decrypting credentials
 
 ### Module
 
-#### Encrypt
-
-Save encrypted credentials as variable
-
 ```powershell
-$example_encrypted_credentials = New-ManagedCredential
-# (Get-Credentials)-Window is shown to enter username and password. You don't need to type the password as plain text.
-```
+PS> $example_encrypted_credentials = New-ManagedCredential	# (Get-Credentials)-Window will popup to enter credentials securely
 
-Encrypt credentials and save as xml-file. 
 
-```powershell
-New-ManagedCredential -OutFile E:\Scripts\example_credentials.xml
-# (Get-Credentials)-Window is shown to enter username and password. You don't need to type the password as plain text. 
-```
+# Variable: $example_encrypted_credentials
 
-#### Decrypt
-
-Decrypt credentials and return PSCredentials-Object
-
-```powershell
-Get-ManagedCredential -EncryptedCredentials $example_encrypted_credentials
-```
-
-Decrypt credentials and return password as plain text (custom object)
-
-```powershell
-Get-ManagedCredential -FilePath E:\Scripts\example_credentials.xml -PasswordAsPlainText
-```
-### Script
-
-#### Encrypt
-
-Save encrypted credentials as variable
-
-```powershell
-$example_encrypted_credentials = .\Manage-Credentials.ps1 -Encrypt
-# (Get-Credentials)-Window is shown to enter username and password. You don't need to type the password as plain text.
-```
-
-Encrypt credentials and save as xml-file. 
-
-```powershell
-.\Manage-Credentials.ps1 -Encrypt -OutFile E:\Scripts\example_credentials.xml
-# (Get-Credentials)-Window is shown to enter username and password. You don't need to type the password as plain text. 
-```
-
-#### Decrypt
-
-Decrypt credentials and return PSCredentials-Object
-
-```powershell
-.\Manage-Credentials.ps1 -Decrypt -EncryptedCredentials $example_encrypted_credentials
-```
-
-Decrypt credentials and return password as plain text (custom object)
-
-```powershell
-.\Manage-Credentials.ps1 -Decrypt -FilePath E:\Scripts\example_credentials.xml -PasswordAsPlainText
-```
-
-## Output
-
-### Encrypted credentials as xml-file
-
-![Screenshot of Module and Script Result](https://github.com/BornToBeRoot/PowerShell_Manage-Credentials/blob/master/Documentation/Encrypted_Credentials_XML-File.png?raw=true)
-
-### PSCredentials
-
-```powershell
 UserName                                                             Password
 --------                                                             --------
 Admin                                                                System.Security.SecureString
+
+
+PS> .\New-ManagedCredential.ps1 -OutFile E:\Scripts\example_credentials.xml
 ```
 
-### Custom-PSObject (with password in plain text)
+#### Decrypt
+
+Decrypt credentials and return PSCredentials-Object
 
 ```powershell
+PS> Get-ManagedCredential -EncryptedCredentials $example_encrypted_credentials
+
+UserName                                                             Password
+--------                                                             --------
+Admin                                                                System.Security.SecureString
+
+
+PS> .\Get-ManagedCredential.ps1 -FilePath E:\Scripts\example_credentials.xml -PasswordAsPlainText
+
 Username                                                             Password
 --------                                                             --------
 Admin                                                                PowerShell
 ```
+
+### Encrypted xml-file
+
+![Screenshot of Module and Script Result](https://github.com/BornToBeRoot/PowerShell_Manage-Credentials/blob/master/Documentation/Encrypted_Credentials_XML-File.png?raw=true)
