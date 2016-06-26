@@ -53,7 +53,6 @@ Admin                                                                System.Secu
 ### Script
 
 ```powershell
-                                                          System.Security.SecureString
 PS> .\New-ManagedCredential.ps1 -OutFile E:\Scripts\example_credentials.xml
 
 PS> .\Get-ManagedCredential.ps1 -FilePath E:\Scripts\example_credentials.xml -PasswordAsPlainText
