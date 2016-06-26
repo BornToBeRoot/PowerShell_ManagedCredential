@@ -2,33 +2,42 @@
 # Language     :  PowerShell 4.0
 # Filename     :  ManagedCredentials.psm1
 # Autor        :  BornToBeRoot (https://github.com/BornToBeRoot)
-# Description  :  Module to Encrypt/Decrypt Credentials and save them as variable or xml-file
+# Description  :  Encrypt and Decrypt credentials and save them as variable or xml-file
 # Repository   :  https://github.com/BornToBeRoot/PowerShell_Manage-Credentials
 ###############################################################################################################
 
 <#
     .SYNOPSIS
-    Function to encrypt credentials as SecureString
-
+    Encrypt credentials (Username and Password) and save them as variable or xml-file using SecureStrings
+    
     .DESCRIPTION
-    With this function, you can encrypt your crendentials (username and password) as SecureString and save them
-	as a variable or xml-file. 
+    Encrypt credentials (username and password) as SecureStrings and save them as a variable or xml-file. 
+    The encrypted credentials can only be decrypted on the same computer and under the same user, 
+    which encrypted them.
 
-	The encrypted credentials can only be decrypted on the same computer and under the same user, which encrypted
-    them. 
-    For exmaple: 
-    If user A encrypt the credentials on computer A, user B cannot decrypt the credentials on 
-    computer A and also user A cannot decrypt the credentials on Computer B.
-
+    For exmaple: If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the credentials on 
+    computer "A" and also user "A" cannot decrypt the credentials on Computer "B".
+        
     .EXAMPLE
-    $Encrypted_Credentials = New-ManagedCredential    
+    $example_encrypted_credentials = New-ManagedCredential	# (Get-Credentials)-Window will popup to enter credentials securely
 
+    Get-ManagedCredential -EncryptedCredentials $example_encrypted_credentials
+
+    UserName                                                             Password
+    --------                                                             --------
+    Admin               											     System.Security.SecureString
+    
     .EXAMPLE
-    New-ManagedCredential -OutFile E:\Scripts\Credentials.xml
-	      
-    .LINK
-    Github Profil:         https://github.com/BornToBeRoot
-    Github Repository:     https://github.com/BornToBeRoot/PowerShell_Manage-Credentials
+    New-ManagedCredential -OutFile E:\Scripts\example_credentials.xml
+
+    Get-ManagedCredential -FilePath E:\Scripts\example_credentials.xml -PasswordAsPlainText
+
+    Username                                                             Password
+    --------                                                             --------
+    Admin                                                                PowerShell
+
+	.LINK
+	https://github.com/BornToBeRoot/PowerShell_Manage-Credentials/blob/master/README.md
 #>
 
 function New-ManagedCredential()
@@ -46,7 +55,10 @@ function New-ManagedCredential()
         [String]$OutFile
     )
 
-    Begin{}
+    Begin{
+
+	}
+
 	Process{
 		if($Credentials -eq $null)
         {
@@ -91,31 +103,44 @@ function New-ManagedCredential()
 			return $EncryptedCredentials
 		}
 	}
-	End{}
+
+	End{
+
+	}
 }
 
 <#
     .SYNOPSIS
-    Function to decrypt encrypted credentials (SecureString to plain text)
+    Decrypt encrypted credentials and return them as SecureString or as plain text.
 
     .DESCRIPTION
-    With this function, you can decrypt encrypted credentials and return them as SecureStringplain text.
-	
-	The encrypted credentials can only be decrypted on the same computer and under the same user, which encrypted
-    them. 
-    For exmaple: 
-    If user A encrypt the credentials on computer A, user B cannot decrypt the credentials on 
-    computer A and also user A cannot decrypt the credentials on Computer B.
+    Decrypt encrypted credentials and return them as SecureString or as plain text.
+    The encrypted credentials can only be decrypted on the same computer and under the same user, 
+    which encrypted them.
+
+    For exmaple: If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the credentials on 
+    computer "A" and also user "A" cannot decrypt the credentials on Computer "B".
 
     .EXAMPLE
-	Get-ManagedCredential -EncryptedCredentials $Encrypted_Credentials
-        
+    $example_encrypted_credentials = New-ManagedCredential	# (Get-Credentials)-Window will popup to enter credentials securely
+
+    Get-ManagedCredential -EncryptedCredentials $example_encrypted_credentials
+
+    UserName                                                             Password
+    --------                                                             --------
+    Admin               											     System.Security.SecureString
+    
     .EXAMPLE
-    $Creds = Get-ManagedCredential -FilePath E:\Scripts\Credentials.xml -PasswordAsPlainText
+    New-ManagedCredential -OutFile E:\Scripts\example_credentials.xml
+
+    Get-ManagedCredential -FilePath E:\Scripts\example_credentials.xml -PasswordAsPlainText
+
+    Username                                                             Password
+    --------                                                             --------
+    Admin                                                                PowerShell
 	        
     .LINK
-    Github Profil:         https://github.com/BornToBeRoot
-    Github Repository:     https://github.com/BornToBeRoot/PowerShell_Manage-Credentials
+    https://github.com/BornToBeRoot/PowerShell_Manage-Credentials/blob/master/README.md
 #>
 
 function Get-ManagedCredential()
@@ -138,7 +163,10 @@ function Get-ManagedCredential()
 		[Switch]$PasswordAsPlainText
 	)
 
-	Begin{}
+	Begin{
+
+	}
+
 	Process
 	{
 		if(-not([String]::IsNullOrEmpty($FilePath)))
@@ -182,5 +210,8 @@ function Get-ManagedCredential()
             return $Credentials
         }
 	}
-	End{}
+
+	End{
+
+	}
 }

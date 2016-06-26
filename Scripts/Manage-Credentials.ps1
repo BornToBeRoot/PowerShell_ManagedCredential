@@ -8,37 +8,37 @@
 
 <#
     .SYNOPSIS
-    Script to Encrypt/Decrypt Credentials (Username and Password) and save them as xml-file using SecureStrings
+    Encrypt and Decrypt credentials (Username and Password) and save them as xml-file using SecureStrings
     
     .DESCRIPTION
-    With this script, you can encrypt your credentials (username and password) as SecureStrings and save them 
-    as a variable or xml-file. You can also decrypt the variable or xml-file and return a PSCredential-Object
-    or username and password in plain text.
+    Encrypt your credentials (username and password) as SecureStrings and save them as a variable or xml-file. 
+    You can also decrypt the variable or xml-file and return a PSCredential-Object or username and password in 
+    plain text. The encrypted credentials can only be decrypted on the same computer and under the same user, 
+    which encrypted them.
 
-    The encrypted credentials can only be decrypted on the same computer and under the same user, which encrypted
-    them. 
-    For exmaple: 
-    If user A encrypt the credentials on computer A, user B cannot decrypt the credentials on 
-    computer A and also user A cannot decrypt the credentials on Computer B.
+    For exmaple: If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the credentials on 
+    computer "A" and also user "A" cannot decrypt the credentials on Computer "B".
         
-    If you found a bug or have some ideas to improve this script... Let me know. You find my Github profile in
-    the links below.
+    .EXAMPLE
+    $example_encrypted_credentials = .\New-ManagedCredential.ps1	# (Get-Credentials)-Window will popup to enter credentials securely
+
+    .\Get-ManagedCredential.ps1 -EncryptedCredentials $example_encrypted_credentials
+
+    UserName                                                             Password
+    --------                                                             --------
+    Admin               											     System.Security.SecureString
     
     .EXAMPLE
-    $Test_Cred = .\Manage-Credentials.ps1 -Encrypt
-    
-    .EXAMPLE
-    .\Manage-Credentials.ps1 -Encrypt -OutFile E:\Scripts\Test_Cred.xml
-    
-    .EXAMPLE
-    .\Manage-Credentials.ps1 -Decrypt -EncryptedCredentials $Test_Cred
-    
-    .EXAMPLE
-    .\Manage-Credentials.ps1 -Decrypt -FilePath E:\Scripts\Test_Cred.xml -PasswordAsPlainText
-    
-    .LINK
-    Github Profil:         https://github.com/BornToBeRoot
-    Github Repository:     https://github.com/BornToBeRoot/PowerShell_Manage-Credentials
+    .\New-ManagedCredential.ps1 -OutFile E:\Scripts\example_credentials.xml
+
+    .\Get-ManagedCredential.ps1 -FilePath E:\Scripts\example_credentials.xml -PasswordAsPlainText
+
+    Username                                                             Password
+    --------                                                             --------
+    Admin                                                                PowerShell
+
+	.LINK
+	https://github.com/BornToBeRoot/PowerShell_Manage-Credentials/blob/master/README.md
 #>
 
 
@@ -85,7 +85,10 @@ Param(
     [switch]$PasswordAsPlainText
 )
 
-Begin{}
+Begin{
+
+}
+
 Process
 {
     if($Encrypt)
@@ -182,4 +185,7 @@ Process
         Write-Host 'Try "Get-Help .\Manage-Credentials.ps1" for more details'        
     }
 }
-End{}
+
+End{
+    
+}
