@@ -2,7 +2,7 @@
 # Language     :  PowerShell 4.0
 # Filename     :  Manage-Credentials.ps1
 # Autor        :  BornToBeRoot (https://github.com/BornToBeRoot)
-# Description  :  Script to Encrypt/Decrypt Credentials and save them as variable or xml-file
+# Description  :  Encrypt and Decrypt credentials and save them as variable or xml-file
 # Repository   :  https://github.com/BornToBeRoot/PowerShell_Manage-Credentials
 ###############################################################################################################
 
@@ -26,7 +26,7 @@
 
     UserName                                                             Password
     --------                                                             --------
-    Admin               											     System.Security.SecureString
+    Admin               						 System.Security.SecureString
     
     .EXAMPLE
     .\New-ManagedCredential.ps1 -OutFile E:\Scripts\example_credentials.xml
