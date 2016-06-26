@@ -25,7 +25,7 @@
 
     UserName                                                             Password
     --------                                                             --------
-    Admin               											     System.Security.SecureString
+    Admin               						 System.Security.SecureString
     
     .EXAMPLE
     New-ManagedCredential -OutFile E:\Scripts\example_credentials.xml
@@ -128,7 +128,7 @@ function New-ManagedCredential()
 
     UserName                                                             Password
     --------                                                             --------
-    Admin               											     System.Security.SecureString
+    Admin                                                                System.Security.SecureString
     
     .EXAMPLE
     New-ManagedCredential -OutFile E:\Scripts\example_credentials.xml
