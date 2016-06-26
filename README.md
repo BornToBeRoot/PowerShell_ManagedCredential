@@ -16,7 +16,7 @@ For exmaple: If user "A" encrypt the credentials on computer "A", user "B" canno
 1. Download the [latest release](https://github.com/BornToBeRoot/PowerShell-Manage-Credentials/releases/latest)
 * Copy the folder `Module\ManageCredentials` to `C:\Users\%username%\Documents\WindowsPowerShell\Modules\`
 * Open up a PowerShell as an admin and set the execution policy: `Set-ExecutionPolicy RemoteSigned`
-* Import the "ManageCredentials"-Module with the command `Import-Module ManageCredentials` (Maybe add this command to your PowerShell profile)
+* Import the Module with the command `Import-Module ManageCredentials` (Maybe add this command to your PowerShell profile)
 
 ## Syntax
 
