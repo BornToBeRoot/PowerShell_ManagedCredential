@@ -22,7 +22,6 @@ New-ManagedCredential [[-OutFile] <String>] [[-Credentials] <PSCredential>] [<Co
 ```
 
 ### Script
-
 ```powershell
 .\New-ManagedCredential.ps1 [[-OutFile] <String>] [[-Credentials] <PSCredential>] [<CommonParameters>]
 ```
@@ -40,7 +39,7 @@ UsernameAsSecureString : c04fc297eb01000000edade3a984d5ca...
 PasswordAsSecureString : 984d5ca4aa6c39de63b9627730000c22...
 ```
 
- ### Script
+### Script
 
 ```powershell
 PS> .\New-ManagedCredential.ps1 -OutFile E:\Temp\EncryptedCredentials.xml
