@@ -11,9 +11,9 @@ If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the
 ## Functions
 
 | Function | Description | Help |
-| :--- | :--- |
+| :--- | :--- | :---: |
 | [New-ManagedCredential](Module/ManagedCredential/New-ManagedCredential.ps1) | Secure encryption of credentials as SecureString | [:book:](Documentation/New-ManagedCredential.README.md) |
-| [Get-ManagedCredential](Module/ManagedCredential/Get-ManagedCredential.ps1) | Secure decryption of encrypted credentials | [:book:](Get-ManagedCredential.README.md) |
+| [Get-ManagedCredential](Module/ManagedCredential/Get-ManagedCredential.ps1) | Secure decryption of encrypted credentials | [:book:](Documentation/Get-ManagedCredential.README.md) |
 
 ## Install
 
@@ -25,9 +25,9 @@ If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the
 ## Script
 
 | Function | Description | Help |
-| :--- | :--- |
+| :--- | :--- | :---: |
 | [New-ManagedCredential](Script/New-ManagedCredential.ps1) | Secure encryption of credentials as SecureString | [:book:](Documentation/New-ManagedCredential.README.md) |
-| [Get-ManagedCredential](Script/Get-ManagedCredential.ps1) | Secure decryption of encrypted credentials | [:book:](Get-ManagedCredential.README.md) |
+| [Get-ManagedCredential](Script/Get-ManagedCredential.ps1) | Secure decryption of encrypted credentials | [:book:](Documentation/Get-ManagedCredential.README.md) |
 
 ### Encrypted xml-file
 
