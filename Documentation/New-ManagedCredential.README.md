@@ -47,4 +47,4 @@ PS> .\New-ManagedCredential.ps1 -OutFile E:\Temp\EncryptedCredentials.xml
 
 ### Encrypted xml-file
 
-![Screenshot](https://github.com/BornToBeRoot/PowerShell_ManagedCredential/blob/master/Documentation/Encrypted_XML-File.png?raw=true "Encrypted XML-File")
+![Screenshot](https://github.com/BornToBeRoot/PowerShell_ManagedCredential/blob/master/Documentation/Images/Encrypted_XML-File.png?raw=true "Encrypted XML-File")
