@@ -11,7 +11,11 @@ Secure encryption of credentials as SecureString, which can be saved as an xml-f
 
 If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the credentials on computer "A" and also user "A" cannot decrypt the credentials on Computer "B".
 
---- add screenshot here ---
+![Screenshot](Images/New-ManagedCredential.png?raw=true "New-ManagedCredential")
+
+To enter the credentials, the following window appears
+
+![Screenshot](Images/Get-Credential.png?raw=true "Get-Credential")
 
 ## Syntax
 

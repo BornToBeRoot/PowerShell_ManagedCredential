@@ -11,7 +11,7 @@ Secure decryption of encrypted credentials, which have been stored in an xml-fil
 
 If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the credentials on computer "A" and also user "A" cannot decrypt the credentials on Computer "B".
 
---- add screenshot here ---
+![Screenshot](Images/Get-ManagedCredential.png?raw=true "Get-ManagedCredential")
 
 ## Syntax
 
