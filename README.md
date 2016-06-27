@@ -30,8 +30,8 @@ If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the
 
 | Function | Description | Help |
 | :--- | :--- | :---: |
-| [New-ManagedCredential](Scripts/New-ManagedCredential.ps1) | Secure encryption of credentials as SecureString | [:book:](Documentation/New-ManagedCredential.README.md) |
-| [Get-ManagedCredential](Scripts/Get-ManagedCredential.ps1) | Secure decryption of encrypted credentials | [:book:](Documentation/Get-ManagedCredential.README.md) |
+| [New-ManagedCredential.ps1](Scripts/New-ManagedCredential.ps1) | Secure encryption of credentials as SecureString | [:book:](Documentation/New-ManagedCredential.README.md) |
+| [Get-ManagedCredential.ps1](Scripts/Get-ManagedCredential.ps1) | Secure decryption of encrypted credentials | [:book:](Documentation/Get-ManagedCredential.README.md) |
 
 ## Encrypted xml-file
 
