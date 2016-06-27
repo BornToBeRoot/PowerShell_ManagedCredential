@@ -31,4 +31,4 @@ If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the
 
 ### Encrypted xml-file
 
-![Screenshot](https://github.com/BornToBeRoot/PowerShell_ManagedCredential/blob/master/Documentation/Encrypted_XML-File.png?raw=true "Encrypted XML-File")
+![Screenshot](https://github.com/BornToBeRoot/PowerShell_ManagedCredential/blob/master/Documentation/Images/Encrypted_XML-File.png?raw=true "Encrypted XML-File")
