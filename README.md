@@ -12,11 +12,6 @@ If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the
 
 ## Module
 
-| Function | Description | Help |
-| :--- | :--- | :---: |
-| [New-ManagedCredential](Module/ManagedCredential/New-ManagedCredential.ps1) | Secure encryption of credentials as SecureString | [:book:](Documentation/New-ManagedCredential.README.md) |
-| [Get-ManagedCredential](Module/ManagedCredential/Get-ManagedCredential.ps1) | Secure decryption of encrypted credentials | [:book:](Documentation/Get-ManagedCredential.README.md) |
-
 #### How to install the module?
 
 1. Download the [latest Release](https://github.com/BornToBeRoot/PowerShell_ManagedCredential/releases/latest) 
@@ -24,7 +19,14 @@ If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the
 3. Open up a PowerShell as an admin and set the execution policy: `Set-ExecutionPolicy RemoteSigned`
 4. Import the Module with the command `Import-Module ManagedCredential` (Maybe add this command to your PowerShell profile)
 
-## Script
+#### Available functions
+
+| Function | Description | Help |
+| :--- | :--- | :---: |
+| [New-ManagedCredential](Module/ManagedCredential/New-ManagedCredential.ps1) | Secure encryption of credentials as SecureString | [:book:](Documentation/New-ManagedCredential.README.md) |
+| [Get-ManagedCredential](Module/ManagedCredential/Get-ManagedCredential.ps1) | Secure decryption of encrypted credentials | [:book:](Documentation/Get-ManagedCredential.README.md) |
+
+## Scripts
 
 | Function | Description | Help |
 | :--- | :--- | :---: |
