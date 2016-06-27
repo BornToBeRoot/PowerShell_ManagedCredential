@@ -39,7 +39,7 @@ UserName                Password
 Admin                   System.Security.SecureString
  ```
 
- ### Script
+### Script
 
 ```powershell
 PS> .\Get-ManagerdCredential.ps1 -FilePath E:\Temp\EncryptedCredentials.xml -PasswordAsPlainText
