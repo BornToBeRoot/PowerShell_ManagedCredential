@@ -1,10 +1,10 @@
-# PowerShell ManagedCredential
+# ManagedCredential
 
 Module and script for secure encrpytion and decryption of credentials.
 
 ## Description
 
-Module and script for secure encrpytion and decryption of credentials.
+Module and script for secure encrpytion and decryption of credentials. Encrypted credentials can be stored in an xml-file or variable and be decrypted from there.
 
 If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the credentials on computer "A" and also user "A" cannot decrypt the credentials on Computer "B".
 
