@@ -8,6 +8,8 @@ Module and script for secure encrpytion and decryption of credentials. Encrypted
 
 This function uses the [SecureString Class](https://msdn.microsoft.com/en-us/library/system.security.securestring(v=vs.110).aspx) from the .NET-Framework. Once encrypted credentials, can only be decrypted by the same user and on the same computer.
 
+![SecureString](Documentation/Images/SecureString_HowTo.png?raw=true "SecureString HowTo")
+
 If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the credentials on computer "A" and also user "A" cannot decrypt the credentials on Computer "B".
 
 ## Module
@@ -35,4 +37,4 @@ If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the
 
 ## Encrypted xml-file
 
-![Screenshot](https://github.com/BornToBeRoot/PowerShell_ManagedCredential/blob/master/Documentation/Images/Encrypted_XML-File.png?raw=true "Encrypted XML-File")
+![Screenshot](Documentation/Images/Encrypted_XML-File.png?raw=true "Encrypted XML-File")
