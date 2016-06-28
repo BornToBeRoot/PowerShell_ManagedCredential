@@ -37,7 +37,7 @@ Param(
         Position=0,
         HelpMessage='Path to the xml-file where the encrypted credentials will be saved')]
     [String]$OutFile,
-    
+
     [Parameter(
         Position=1,
         HelpMessage='PSCredential-Object (e.g. Get-Credentials)')]
@@ -88,8 +88,7 @@ Process{
             }
 
             if(($answer -eq "no") -or ($answer -eq "n"))         
-            {
-                Write-Host "Canceled by User." -ForegroundColor Yellow
+            {                    
                 return
             }
         }           

@@ -90,8 +90,7 @@ function New-ManagedCredential()
                 }
 
                 if(($answer -eq "no") -or ($answer -eq "n"))         
-                {
-                    Write-Host "Canceled by User." -ForegroundColor Yellow
+                {                    
                     return
                 }
             }           
