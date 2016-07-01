@@ -13,7 +13,7 @@ If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the
 
 ![Screenshot](Images/New-ManagedCredential.png?raw=true "New-ManagedCredential")
 
-To enter the credentials, the following window appears
+To enter the credentials, the following window appears:
 
 ![Screenshot](Images/Get-Credential.png?raw=true "Get-Credential")
 
