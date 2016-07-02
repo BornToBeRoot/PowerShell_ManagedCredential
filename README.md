@@ -1,6 +1,6 @@
 # ManagedCredential
 
-Module and script for secure encrpytion and decryption of credentials in PowerShell.
+Secure encrpytion and decryption of credentials in PowerShell.
 
 ## Description
 
