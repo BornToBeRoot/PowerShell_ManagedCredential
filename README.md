@@ -4,7 +4,7 @@ Secure encrpytion and decryption of credentials in PowerShell.
 
 ## Description
 
-Module and script for secure encrpytion and decryption of credentials. Encrypted credentials can be stored in an xml-file or variable and be decrypted from there. 
+Module and script for secure encrpytion and decryption of credentials in PowerShell. Encrypted credentials can be stored in an xml-file or variable and be decrypted from there. 
 
 This function uses the [SecureString Class](https://msdn.microsoft.com/en-us/library/system.security.securestring(v=vs.110).aspx) from the .NET-Framework. Once encrypted credentials, can only be decrypted by the same user and on the same computer.
 
