@@ -2,7 +2,7 @@
 
 Secure encryption of credentials as SecureString.
 
-* [view function](https://github.com/BornToBeRoot/PowerShell_ManagedCredential/blob/master/Module/ManagedCredential/New-ManagedCredential.ps1)
+* [view function](https://github.com/BornToBeRoot/PowerShell_ManagedCredential/blob/master/Module/ManagedCredential/Functions/New-ManagedCredential.ps1)
 * [view script](https://github.com/BornToBeRoot/PowerShell_ManagedCredential/blob/master/Scripts/New-ManagedCredential.ps1)
 
 ## Description

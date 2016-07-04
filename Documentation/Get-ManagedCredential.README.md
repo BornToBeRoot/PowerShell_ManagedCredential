@@ -2,7 +2,7 @@
 
 Secure decryption of encrypted credentials.
 
-* [view function](https://github.com/BornToBeRoot/PowerShell_ManagedCredential/blob/master/Module/ManagedCredential/Get-ManagedCredential.ps1)
+* [view function](https://github.com/BornToBeRoot/PowerShell_ManagedCredential/blob/master/Module/ManagedCredential/Functions/Get-ManagedCredential.ps1)
 * [view script](https://github.com/BornToBeRoot/PowerShell_ManagedCredential/blob/master/Scripts/Get-ManagedCredential.ps1)
 
 ## Description
