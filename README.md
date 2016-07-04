@@ -1,4 +1,4 @@
-# ManagedCredential
+# PowerShell - ManagedCredential
 
 Secure encrpytion and decryption of credentials in PowerShell.
 
