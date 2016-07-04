@@ -21,7 +21,7 @@ If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the
 3. Open up a PowerShell as an admin and set the execution policy: `Set-ExecutionPolicy RemoteSigned`
 4. Import the Module with the command `Import-Module ManagedCredential` (Maybe add this command to your PowerShell profile)
 
-#### Available functions
+#### Available functions:
 
 | Function | Description | Help |
 | :--- | :--- | :---: |
