@@ -7,4 +7,4 @@
 ###############################################################################################################
 
 # Include functions which are outsourced in .ps1-files
-Get-ChildItem -Path $PSScriptRoot | Where-Object {$_.Name.EndsWith(".ps1")} | ForEach-Object {. $_.FullName}
+Get-ChildItem -Path $PSScriptRoot -Recurse | Where-Object {$_.Name.EndsWith(".ps1")} | ForEach-Object {. $_.FullName}
