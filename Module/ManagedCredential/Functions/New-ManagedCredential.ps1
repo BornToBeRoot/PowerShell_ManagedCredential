@@ -84,13 +84,13 @@ function New-ManagedCredential()
 
             if([System.IO.File]::Exists($FilePath))
             {     
-                while("yes","y","no","n" -notcontains $answer)
+                do {
+                    $Answer = Read-Host "Do you want to overwrite the exisiting file? [yes|no]"
+                
+                } while("yes","y","no","n" -notcontains $Answer)
+        
+                if("no","n" -contains $Answer)
                 {
-	                $answer = Read-Host "Do you want to overwrite the exisiting file? ([yes] or [no])"
-                }
-
-                if(($answer -eq "no") -or ($answer -eq "n"))         
-                {                    
                     return
                 }
             }           
