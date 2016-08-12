@@ -68,29 +68,25 @@ function Get-ManagedCredential()
 		{			
 			if(-not(Test-Path -Path $FilePath))
 			{
-				Write-Host "FilePath ($FilePath) does not exists. Check your Input!" -ForegroundColor Yellow
-				return	
+				Write-Error -Message "FilePath ($FilePath) does not exists. Check your Input!" -Category InvalidArgument -ErrorAction Stop
 			}
 
 			if((Get-Item -Path $FilePath) -is [System.IO.DirectoryInfo])
 			{
-				Write-Host "FilePath ($FilePath) is a directory, but an xml-file is required. Check your input!" -ForegroundColor Yellow				
-				return
+				Write-Error -Message "FilePath ($FilePath) is a directory, but an xml-file is required. Check your input!" -Category InvalidArgument -ErrorAction Stop				
 			}				
 			
 			try {
 				$EncryptedCredentials = Import-Clixml -Path $FilePath -ErrorAction Stop				
 			}
-			catch [System.Exception] {
-				Write-Host "Import-Clixml: $($_.Exception.Message)" -ForegroundColor Red
-				return
+			catch {
+				throw
 			}		
 		}
 		
 		if($EncryptedCredentials -eq $null)
 		{			
-			Write-Host 'Nothing to decrypt. Try "Get-Help" for more details' -ForegroundColor Yellow
-			return
+			Write-Error -Message 'Nothing to decrypt. Try "Get-Help" for more details' -Category InvalidData -ErrorAction Stop 
 		}
 		
 		try {
@@ -118,9 +114,8 @@ function Get-ManagedCredential()
 				return $Credentials
 			}
 		}
-		catch [System.Exception] {
-			Write-Host "$($_.Exception.Message)" -ForegroundColor Red
-			return	
+		catch {
+			throw	
 		}
 	}
 

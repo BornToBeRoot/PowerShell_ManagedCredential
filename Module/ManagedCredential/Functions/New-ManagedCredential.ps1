@@ -57,8 +57,7 @@ function New-ManagedCredential()
                 $Credentials = Get-Credential $null 
             } 
 			catch{
-                Write-Host "Canceled by User." -ForegroundColor Yellow
-                return
+                throw
             }      
         }
 	
@@ -84,14 +83,18 @@ function New-ManagedCredential()
 
             if([System.IO.File]::Exists($FilePath))
             {     
-                do {
-                    $Answer = Read-Host "Do you want to overwrite the exisiting file? [yes|no]"
+                $Title = "Overwrite existing file"
+                $Info = "Do you want to overwrite the exisiting file?"
                 
-                } while("yes","y","no","n" -notcontains $Answer)
-        
-                if("no","n" -contains $Answer)
-                {
-                    return
+                $Options = [System.Management.Automation.Host.ChoiceDescription[]] @("&Yes", "&No")
+                [int]$Defaultchoice = 0
+                $Opt =  $host.UI.PromptForChoice($Title , $Info, $Options, $Defaultchoice)
+
+                switch($Opt)
+                {                    
+                    1 { 
+                        return
+                    }
                 }
             }           
 			
@@ -99,7 +102,7 @@ function New-ManagedCredential()
 		}
 		else
 		{
-			return $EncryptedCredentials
+			$EncryptedCredentials
 		}
 	}
 
