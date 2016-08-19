@@ -35,9 +35,9 @@ New-ManagedCredential [[-OutFile] <String>] [[-Credentials] <PSCredential>] [<Co
 ### Function
 
 ```powershell
-PS> $EncryptedCredentials = New-ManagedCredential
+PS> $EncryptedCredential = New-ManagedCredential
 
-PS> $EncryptedCredentials
+PS> $EncryptedCredential
 
 UsernameAsSecureString : c04fc297eb01000000edade3a984d5ca...
 PasswordAsSecureString : 984d5ca4aa6c39de63b9627730000c22...

@@ -17,7 +17,7 @@
     computer "A" and also user "A" cannot decrypt the credentials on Computer "B".
 
     .EXAMPLE
-    .\Get-ManagedCredential.ps1 -EncryptedCredentials $EncryptedCredentials
+    .\Get-ManagedCredential.ps1 -EncryptedCredential $EncryptedCredentials
 
 	UserName                Password
 	--------                --------
@@ -45,15 +45,15 @@ Param(
     
     [Parameter(
         ParameterSetName='Variable',
-        Position=1,
+        Position=0,
         Mandatory=$true,
-        HelpMessage='PSObject with encrypted credentials')]
-    [System.Object]$EncryptedCredentials,
+        HelpMessage='Encrypted credential')]
+    [pscustomobject]$EncryptedCredential,
 
     [Parameter(
         Position=2,
         HelpMessage='Return password as plain text')]
-    [Switch]$PasswordAsPlainText
+    [Switch]$AsPlainText
 )
 
 Begin{
@@ -66,50 +66,48 @@ Process
     {			
         if(-not(Test-Path -Path $FilePath))
         {
-            Write-Error -Message "FilePath ($FilePath) does not exists. Check your Input!" -Category InvalidArgument -ErrorAction Stop
+            throw "FilePath ($FilePath) does not exists. Check your Input!"
         }
 
         if((Get-Item -Path $FilePath) -is [System.IO.DirectoryInfo])
         {
-            Write-Error -Message "FilePath ($FilePath) is a directory, but an xml-file is required. Check your input!" -Category InvalidArgument -ErrorAction Stop				
+            throw "FilePath ($FilePath) is a directory, but an xml-file is required. Check your input!"				
         }				
         
         try {
-            $EncryptedCredentials = Import-Clixml -Path $FilePath -ErrorAction Stop				
+            $EncryptedCredential = Import-Clixml -Path $FilePath -ErrorAction Stop				
         }
         catch {
             throw
         }		
     }
     
-    if($EncryptedCredentials -eq $null)
+    if($null -eq $EncryptedCredential)
     {			
-        Write-Error -Message 'Nothing to decrypt. Try "Get-Help" for more details' -Category InvalidData -ErrorAction Stop 
+        throw 'Nothing to decrypt. Try "Get-Help" for more details'
     }
     
     try {
-        $SecureString_Password = $EncryptedCredentials.PasswordAsSecureString | ConvertTo-SecureString -ErrorAction Stop
-        $SecureString_Username = $EncryptedCredentials.UsernameAsSecureString | ConvertTo-SecureString -ErrorAction Stop
+        $SecureString_Username = $EncryptedCredential.UsernameAsSecureString | ConvertTo-SecureString -ErrorAction Stop
+        $SecureString_Password = $EncryptedCredential.PasswordAsSecureString | ConvertTo-SecureString -ErrorAction Stop
+        
 
         $BSTR_Username = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($SecureString_Username)
         $Username = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR_Username) 
         
-        if($PasswordAsPlainText) 
+        if($AsPlainText) 
         {
             $BSTR_Password = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($SecureString_Password)
             $Password = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR_Password)
 
-            $PlainText_Credentials = New-Object -TypeName PSObject
-            Add-Member -InputObject $PlainText_Credentials -MemberType NoteProperty -Name Username -Value $Username
-            Add-Member -InputObject $PlainText_Credentials -MemberType NoteProperty -Name Password -Value $Password
-
-            return $PlainText_Credentials
+            [pscustomobject] @{
+                Username = $Username
+                Password = $Password
+            }
         }
         else
         {
-            $Credentials = New-Object System.Management.Automation.PSCredential($Username, $SecureString_Password)
-
-            return $Credentials
+            New-Object System.Management.Automation.PSCredential($Username, $SecureString_Password)
         }
     }
     catch {

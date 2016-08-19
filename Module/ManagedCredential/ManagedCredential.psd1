@@ -12,7 +12,7 @@
 RootModule = 'ManagedCredential.psm1'
 
 # Version number of this module.
-ModuleVersion = '3.2'
+ModuleVersion = '3.3'
 
 # ID used to uniquely identify this module
 GUID = '6d5df9cd-c838-4c09-8373-0cd85f77758f'

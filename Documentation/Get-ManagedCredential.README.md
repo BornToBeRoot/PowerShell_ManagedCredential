@@ -18,13 +18,13 @@ If user "A" encrypt the credentials on computer "A", user "B" cannot decrypt the
 ### Function
 
 ```powershell
-Get-ManagedCredential [[-EncryptedCredentials] <Object>] [[-FilePath] <String>] [[-PasswordAsPlainText]] [<CommonParameters>]
+Get-ManagedCredential [[-EncryptedCredential] <Object>] [[-FilePath] <String>] [[-AsPlainText]] [<CommonParameters>]
 ```
 
 ### Script
 
 ```powershell
-.\Get-ManagedCredential.ps1 [[-EncryptedCredentials] <Object>] [[-FilePath] <String>] [[-PasswordAsPlainText]] [<CommonParameters>]
+.\Get-ManagedCredential.ps1 [[-EncryptedCredential] <Object>] [[-FilePath] <String>] [[-AsPlainText]] [<CommonParameters>]
 ```
 
 ## Example
@@ -32,7 +32,7 @@ Get-ManagedCredential [[-EncryptedCredentials] <Object>] [[-FilePath] <String>] 
 ### Function
 
 ```powershell
-PS> Get-ManagedCredential -EncryptedCredentials $EncryptedCredentials
+PS> Get-ManagedCredential -EncryptedCredential $EncryptedCredentials
 
 UserName                Password
 --------                --------
@@ -42,7 +42,7 @@ Admin                   System.Security.SecureString
 ### Script
 
 ```powershell
-PS> .\Get-ManagerdCredential.ps1 -FilePath E:\Temp\EncryptedCredentials.xml -PasswordAsPlainText
+PS> .\Get-ManagerdCredential.ps1 -FilePath E:\Temp\EncryptedCredentials.xml -AsPlainText
 
 Username                Password
 --------                --------

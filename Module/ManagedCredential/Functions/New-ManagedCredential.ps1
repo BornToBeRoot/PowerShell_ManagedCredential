@@ -17,9 +17,9 @@
     computer "A" and also user "A" cannot decrypt the credentials on Computer "B".
         
     .EXAMPLE
-    $EncryptedCredentials = New-ManagedCredential
+    $EncryptedCredential = New-ManagedCredential
 
-    $EncryptedCredentials
+    $EncryptedCredential
         
     UsernameAsSecureString : c04fc297eb01000000edade3a984d5ca...
     PasswordAsSecureString : 984d5ca4aa6c39de63b9627730000c22...
@@ -33,7 +33,7 @@
 
 function New-ManagedCredential()
 {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess=$true)]
     Param(
         [Parameter(
             Position=0,
@@ -41,9 +41,11 @@ function New-ManagedCredential()
         [String]$OutFile,
       
         [Parameter(
-            Position=1,
-			HelpMessage='PSCredential-Object (e.g. Get-Credentials)')]
-        [System.Management.Automation.PSCredential]$Credentials       
+		    Position=1,
+		    HelpMessage='Credentials which are encrypted')]
+        [System.Management.Automation.PSCredential]
+        [System.Management.Automation.CredentialAttribute()]
+        $Credential
     )
 
     Begin{
@@ -51,7 +53,7 @@ function New-ManagedCredential()
 	}
 
 	Process{
-		if($Credentials -eq $null)
+		if($null -eq $Credentials)
         {
             try{
                 $Credentials = Get-Credential $null 
@@ -60,50 +62,57 @@ function New-ManagedCredential()
                 throw
             }      
         }
-	
-		$EncryptedCredentials = New-Object -TypeName PSObject
-		Add-Member -InputObject $EncryptedCredentials -MemberType NoteProperty -Name UsernameAsSecureString -Value ($Credentials.UserName | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString)
-		Add-Member -InputObject $EncryptedCredentials -MemberType NoteProperty -Name PasswordAsSecureString -Value ($Credentials.Password | ConvertFrom-SecureString)
-		
-		if(-not([String]::IsNullOrEmpty($OutFile)))
+        
+        $EncryptedUsername =  $Credentials.UserName | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString
+        $EncryptedPassword =  $Credentials.Password | ConvertFrom-SecureString
+
+        $EncryptedCredentials = [pscustomobject] @{
+            UsernameAsSecureString = $EncryptedUsername
+            PasswordAsSecureString = $EncryptedPassword
+        }
+         
+        if(-not([String]::IsNullOrEmpty($OutFile)))
         {               
-			if(-not([System.IO.Path]::IsPathRooted($OutFile))) 
+            if(-not([System.IO.Path]::IsPathRooted($OutFile))) 
             { 	
-				$FilePath = Join-Path -Path $PSScriptRoot -ChildPath $OutFile.Replace(".\","")
+                $FilePath = Join-Path -Path $PSScriptRoot -ChildPath $OutFile.Replace(".\","")
             }
-			else
-			{
-				$FilePath = $OutFile
-			}
-	    
+            else
+            {
+                $FilePath = $OutFile
+            }
+        
             if(-not($FilePath.ToLower().EndsWith(".xml"))) 
             { 
                 $FilePath += ".xml" 
             }
 
-            if([System.IO.File]::Exists($FilePath))
-            {     
-                $Title = "Overwrite existing file"
-                $Info = "Do you want to overwrite the exisiting file?"
-                
-                $Options = [System.Management.Automation.Host.ChoiceDescription[]] @("&Yes", "&No")
-                [int]$Defaultchoice = 0
-                $Opt =  $host.UI.PromptForChoice($Title , $Info, $Options, $Defaultchoice)
+            if($PSCmdlet.ShouldProcess($FilePath))
+            { 
+                if([System.IO.File]::Exists($FilePath))
+                {     
+                    $Title = "Overwrite existing file"
+                    $Info = "Do you want to overwrite the exisiting file?"
+                    
+                    $Options = [System.Management.Automation.Host.ChoiceDescription[]] @("&Yes", "&No")
+                    [int]$Defaultchoice = 0
+                    $Opt =  $host.UI.PromptForChoice($Title , $Info, $Options, $Defaultchoice)
 
-                switch($Opt)
-                {                    
-                    1 { 
-                        return
+                    switch($Opt)
+                    {                    
+                        1 { 
+                            return
+                        }
                     }
                 }
-            }           
-			
-            $EncryptedCredentials | Export-Clixml -Path $FilePath
-		}
-		else
-		{
-			$EncryptedCredentials
-		}
+              
+                $EncryptedCredentials | Export-Clixml -Path $FilePath
+            }
+        }
+        else 
+        {
+            $EncryptedCredentials
+        }
 	}
 
 	End{

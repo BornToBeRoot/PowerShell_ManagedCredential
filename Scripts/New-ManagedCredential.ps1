@@ -31,7 +31,7 @@
 	https://github.com/BornToBeRoot/PowerShell_ManagedCredential/blob/master/Documentation/New-ManagedCredential.README.md
 #>
 
-[CmdletBinding()]
+[CmdletBinding(SupportsShouldProcess=$true)]
 Param(
     [Parameter(
         Position=0,
@@ -40,8 +40,10 @@ Param(
     
     [Parameter(
         Position=1,
-        HelpMessage='PSCredential-Object (e.g. Get-Credentials)')]
-    [System.Management.Automation.PSCredential]$Credentials       
+        HelpMessage='Credentials which are encrypted')]
+    [System.Management.Automation.PSCredential]
+    [System.Management.Automation.CredentialAttribute()]
+    $Credential
 )
 
 Begin{
@@ -49,7 +51,7 @@ Begin{
 }
 
 Process{
-    if($Credentials -eq $null)
+    if($null -eq $Credentials)
     {
         try{
             $Credentials = Get-Credential $null 
@@ -58,11 +60,15 @@ Process{
             throw
         }      
     }
-
-    $EncryptedCredentials = New-Object -TypeName PSObject
-    Add-Member -InputObject $EncryptedCredentials -MemberType NoteProperty -Name UsernameAsSecureString -Value ($Credentials.UserName | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString)
-    Add-Member -InputObject $EncryptedCredentials -MemberType NoteProperty -Name PasswordAsSecureString -Value ($Credentials.Password | ConvertFrom-SecureString)
     
+    $EncryptedUsername =  $Credentials.UserName | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString
+    $EncryptedPassword =  $Credentials.Password | ConvertFrom-SecureString
+
+    $EncryptedCredentials = [pscustomobject] @{
+        UsernameAsSecureString = $EncryptedUsername
+        PasswordAsSecureString = $EncryptedPassword
+    }
+        
     if(-not([String]::IsNullOrEmpty($OutFile)))
     {               
         if(-not([System.IO.Path]::IsPathRooted($OutFile))) 
@@ -79,26 +85,29 @@ Process{
             $FilePath += ".xml" 
         }
 
-        if([System.IO.File]::Exists($FilePath))
-        {     
-            $Title = "Overwrite existing file"
-            $Info = "Do you want to overwrite the exisiting file?"
-            
-            $Options = [System.Management.Automation.Host.ChoiceDescription[]] @("&Yes", "&No")
-            [int]$Defaultchoice = 0
-            $Opt =  $host.UI.PromptForChoice($Title , $Info, $Options, $Defaultchoice)
+        if($PSCmdlet.ShouldProcess($FilePath))
+        {
+            if([System.IO.File]::Exists($FilePath))
+            {     
+                $Title = "Overwrite existing file"
+                $Info = "Do you want to overwrite the exisiting file?"
+                
+                $Options = [System.Management.Automation.Host.ChoiceDescription[]] @("&Yes", "&No")
+                [int]$Defaultchoice = 0
+                $Opt =  $host.UI.PromptForChoice($Title , $Info, $Options, $Defaultchoice)
 
-            switch($Opt)
-            {                    
-                1 { 
-                    return
+                switch($Opt)
+                {                    
+                    1 { 
+                        return
+                    }
                 }
-            }
-        }           
-        
-        $EncryptedCredentials | Export-Clixml -Path $FilePath
+            }           
+          
+            $EncryptedCredentials | Export-Clixml -Path $FilePath
+        }
     }
-    else
+    else 
     {
         $EncryptedCredentials
     }
