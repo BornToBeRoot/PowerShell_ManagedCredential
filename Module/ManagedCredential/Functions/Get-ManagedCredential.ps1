@@ -66,7 +66,7 @@ function Get-ManagedCredential()
 	{
 		if($PSCmdlet.ParameterSetName -eq 'File')
 		{			
-			if(-not(Test-Path -Path $FilePath))
+			if(-not(Test-Path -Path $FilePath -PathType Leaf))
 			{
 				throw "FilePath ($FilePath) does not exists. Check your Input!"
 			}
