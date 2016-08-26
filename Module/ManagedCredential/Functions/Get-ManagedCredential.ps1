@@ -43,6 +43,16 @@ function Get-ManagedCredential()
 			Position=0,
 			Mandatory=$true,
 			HelpMessage='Path to the xml-file where the encrypted credentials are saved')]
+		[ValidateScript({
+			if(Test-Path -Path $_ -PathType Leaf)
+			{
+				return $true
+			}
+			else 
+			{
+				throw "FilePath ($_) does not exist!"
+			}
+		})]
 		[String]$FilePath,
 		
 		[Parameter(
@@ -66,16 +76,6 @@ function Get-ManagedCredential()
 	{
 		if($PSCmdlet.ParameterSetName -eq 'File')
 		{			
-			if(-not(Test-Path -Path $FilePath -PathType Leaf))
-			{
-				throw "FilePath ($FilePath) does not exists. Check your Input!"
-			}
-
-			if((Get-Item -Path $FilePath) -is [System.IO.DirectoryInfo])
-			{
-				throw "FilePath ($FilePath) is a directory, but an xml-file is required. Check your input!"				
-			}				
-			
 			try {
 				$EncryptedCredential = Import-Clixml -Path $FilePath -ErrorAction Stop				
 			}
