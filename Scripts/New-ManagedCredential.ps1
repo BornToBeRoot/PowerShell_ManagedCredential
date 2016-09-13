@@ -51,18 +51,18 @@ Begin{
 }
 
 Process{
-    if($null -eq $Credentials)
+    if($null -eq $Credential)
     {
         try{
-            $Credentials = Get-Credential $null 
+            $Credential = Get-Credential $null 
         } 
         catch{
             throw
         }      
     }
     
-    $EncryptedUsername =  $Credentials.UserName | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString
-    $EncryptedPassword =  $Credentials.Password | ConvertFrom-SecureString
+    $EncryptedUsername =  $Credential.UserName | ConvertTo-SecureString -AsPlainText -Force | ConvertFrom-SecureString
+    $EncryptedPassword =  $Credential.Password | ConvertFrom-SecureString
 
     $EncryptedCredentials = [pscustomobject] @{
         UsernameAsSecureString = $EncryptedUsername
