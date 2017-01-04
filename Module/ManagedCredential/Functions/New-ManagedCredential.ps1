@@ -98,12 +98,10 @@ function New-ManagedCredential()
                     [int]$Defaultchoice = 0
                     $Opt =  $host.UI.PromptForChoice($Title , $Info, $Options, $Defaultchoice)
 
-                    switch($Opt)
-                    {                    
-                        1 { 
-                            return
-                        }
-                    }
+                    if($Opt -ne $Defaultchoice)
+                    { 
+                      	return
+             	    }
                 }
               
                 $EncryptedCredentials | Export-Clixml -Path $FilePath
