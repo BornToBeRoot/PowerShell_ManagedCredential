@@ -57,6 +57,7 @@ Param(
         ParameterSetName='Variable',
         Position=0,
         Mandatory=$true,
+        ValueFromPipeline=$true,
         HelpMessage='Encrypted credential')]
     [pscustomobject]$EncryptedCredential,
 
