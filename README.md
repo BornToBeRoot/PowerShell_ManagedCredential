@@ -1,3 +1,8 @@
+Repo archived because secure string shouldn't be used anymore :)
+
+See https://github.com/dotnet/platform-compat/blob/master/docs/DE0001.md
+
+
 # PowerShell - ManagedCredential
 
 Secure encrpytion and decryption of credentials in PowerShell.
